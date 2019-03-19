@@ -1,0 +1,78 @@
+nohup java -jar solr_to_csv.jar source:healthgrades dummy 1>> healthgrades.csv 2>> std.err &
+nohup java -jar solr_to_csv.jar source:ratemds dummy 1>> ratemds.csv 2>> std.err &
+nohup java -jar solr_to_csv.jar source:superpages dummy 1>> superpages.csv 2>> std.err &
+nohup java -jar solr_to_csv.jar source:zocdoc dummy 1>> zocdoc.csv 2>> std.err &
+nohup java -jar solr_to_csv.jar source:yellowbot dummy 1>> yellowbot.csv 2>> std.err &
+
+
+nohup java -jar healthgrades_matcher.jar 1>> healthgrades_2018-04-06.csv 2>> std.err &
+
+-------------------------
+
+nohup java -jar solr_matcher.jar "+source:healthgrades +spname:cardiology" "Provider_Taxonomies:cardiology" 1>> healthgrades_cardiology.csv 2>> std.err &
+nohup java -jar solr_matcher.jar "+source:wellness +spname:cardiologist" "Provider_Taxonomies:cardiology" 1>> wellness_cardiology.csv 2>> std.err &
+nohup java -jar solr_matcher.jar "+source:zocdoc +spname:cardiologist" "Provider_Taxonomies:cardiology" 1>> zocdoc_cardiology.csv 2>> std.err &
+nohup java -jar solr_matcher.jar "+source:ratemds +spname:cardiologist" "Provider_Taxonomies:cardiology" 1>> ratemds_cardiology.csv 2>> std.err &
+nohup java -jar solr_matcher.jar "+source:yellowbot +spname:cardiologist" "Provider_Taxonomies:cardiology" 1>> yellowbot_cardiology.csv 2>> std.err &
+nohup java -jar solr_matcher.jar "+source:yellowpages +spname:cardiolog*" "Provider_Taxonomies:cardiology" 1>> yellowpages_cardiology.csv 2>> std.err &
+
+--------------------------
+
+nohup java -jar solr_matcher.jar "+source:healthgrades +spname:obstetrics & gynecology" "Provider_Taxonomies:obstetrics/gynecology" 1>> healthgrades_obs_gyn.csv 2>> std.err &
+nohup java -jar solr_matcher.jar "+source:wellness +spname:(obstetrician || obgyn || gynecologist)" "Provider_Taxonomies:obstetrics/gynecology" 1>> wellness_obs_gyn.csv 2>> std.err &
+nohup java -jar solr_matcher.jar "+source:zocdoc +spname:ob-gyn" "Provider_Taxonomies:obstetrics/gynecology" 1>> zocdoc_obs_gyn.csv 2>> std.err &
+nohup java -jar solr_matcher.jar "+source:ratemds +spname:(gynecologist \(obgyn\))" "Provider_Taxonomies:obstetrics/gynecology" 1>> ratemds_obs_gyn.csv 2>> std.err &
+nohup java -jar solr_matcher.jar "+source:yellowpages +spname:(obstetrician \/ gynecologist \(obgyn\) || gynecology || obstetrics & gynecology)" "Provider_Taxonomies:obstetrics/gynecology" 1>> yellowpages_obs_gyn.csv 2>> std.err &
+
+---------------------------
+nohup java -jar solr_matcher.jar "+source:healthgrades +spname:gastroenterology" "Provider_Taxonomies:gastroenterology" 1>> healthgrades_gastroenterology.csv 2>> std.err &
+nohup java -jar solr_matcher.jar "+source:zocdoc +spname:gastroenterologist" "Provider_Taxonomies:gastroenterology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:ratemds +spname:gastroenterologist" "Provider_Taxonomies:gastroenterology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowbot +spname:gastroenterologist" "Provider_Taxonomies:gastroenterology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowpages +spname:gastroentero*" "Provider_Taxonomies:gastroenterology" >> matcher.log &
+
+----------------------------
+nohup java -jar solr_matcher.jar "+source:healthgrades +spname:neurosurgery" "Provider_Taxonomies:neurosurgery" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:wellness +spname:neurosurgeon" "Provider_Taxonomies:neurosurgery" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:zocdoc +spname:neurosurgeon" "Provider_Taxonomies:neurosurgery" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:ratemds +spname:neurosurgeon" "Provider_Taxonomies:neurosurgery" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowbot +spname:neurosurgeon" "Provider_Taxonomies:neurosurgery" >> matcher.log &
+
+---------------------------
+nohup java -jar solr_matcher.jar "+source:healthgrades +spname:otolaryngology*" "Provider_Taxonomies:otolaryngology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowpages +spname:otolaryngolog*" "Provider_Taxonomies:otolaryngology" >> matcher.log &
+---------------------------
+
+nohup java -jar solr_matcher.jar "+source:healthgrades +spname:ophthalmology" "Provider_Taxonomies:ophthalmology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:wellness +spname:ophthalmologist" "Provider_Taxonomies:ophthalmology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:zocdoc +spname:ophthalmologist" "Provider_Taxonomies:ophthalmology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:ratemds +spname:ophthalmologist" "Provider_Taxonomies:ophthalmology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowpages +spname:ophthalmolog*" "Provider_Taxonomies:ophthalmology" >> matcher.log &
+
+----------------------------
+nohup java -jar solr_matcher.jar "+source:healthgrades +spname:endocrinology*" "Provider_Taxonomies:endocrinology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:wellness +spname:endocrinologist*" "Provider_Taxonomies:endocrinology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:zocdoc +spname:endocrinologist*" "Provider_Taxonomies:endocrinology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:ratemds +spname:endocrinologist*" "Provider_Taxonomies:endocrinology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowbot +spname:endocrinologist*" "Provider_Taxonomies:endocrinology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowpages +spname:endocrinologist*" "Provider_Taxonomies:endocrinology" >> matcher.log &
+---------------------------
+nohup java -jar solr_matcher.jar "+source:healthgrades +spname:neurology" "Provider_Taxonomies:neurology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:wellness +spname:neurologist" "Provider_Taxonomies:neurology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:zocdoc +spname:neurologist" "Provider_Taxonomies:neurology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:ratemds +spname:neurologist" "Provider_Taxonomies:neurology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowbot +spname:neurologist" "Provider_Taxonomies:neurology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowpages +spname:neurolog*" "Provider_Taxonomies:neurology" >> matcher.log &
+---------------------------
+nohup java -jar solr_matcher.jar "+source:healthgrades +spname:psychiatry" "Provider_Taxonomies:psychiatry" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:wellness +spname:psychiatrist" "Provider_Taxonomies:psychiatry" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:zocdoc +spname:psychiatrist" "Provider_Taxonomies:psychiatry" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:ratemds +spname:psychiatrist" "Provider_Taxonomies:psychiatry" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowpages +spname:psychia*" "Provider_Taxonomies:psychiatry" >> matcher.log &
+---------------------------
+nohup java -jar solr_matcher.jar "+source:healthgrades +spname:dermatology" "Provider_Taxonomies:dermatology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:wellness +spname:dermatologist" "Provider_Taxonomies:dermatology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:zocdoc +spname:dermatologist" "Provider_Taxonomies:dermatology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:ratemds +spname:dermatologist" "Provider_Taxonomies:dermatology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowbot +spname:dermatologist" "Provider_Taxonomies:dermatology" >> matcher.log &
+nohup java -jar solr_matcher.jar "+source:yellowpages +spname:dermatolog*" "Provider_Taxonomies:dermatology" >> matcher.log &
